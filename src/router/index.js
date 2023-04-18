@@ -53,6 +53,10 @@ router.beforeEach((to, from, next) => {
 
 export const loadMenus = (next, to) => {
   buildMenus().then(res => {
+    console.log('buildMenus', res)
+    res[0].children[0].meta.title = '报验单'
+    res[0].children[1].meta.title = '数据信息管理'
+    console.log('buildMenus', res)
     const sdata = JSON.parse(JSON.stringify(res))
     const rdata = JSON.parse(JSON.stringify(res))
     const sidebarRoutes = filterAsyncRouter(sdata)

@@ -1,3 +1,4 @@
+<!--  隧道衬砌信息管理 -> 报验单 -->
 <template>
   <div class="app-container">
     <!--工具栏-->
@@ -89,7 +90,7 @@
         <rrOperation :crud="crud" />
       </div>
       <!--如果想在工具栏加入更多按钮，可以使用插槽方式， slot = 'left' or 'right'-->
-      <crudOperation :permission="permission" >
+      <crudOperation :permission="permission">
         <template>
           <el-button
             slot="left"
@@ -97,7 +98,7 @@
             size="mini"
             type="primary"
             @click="getDZSdata"
-          >同步电子所</el-button>
+          >同步</el-button>
         </template>
       </crudOperation>
       <!--表单组件-->
@@ -309,7 +310,7 @@ import rrOperation from '@crud/RR.operation'
 import crudOperation from '@crud/CRUD.operation'
 import udOperation from '@crud/UD.operation'
 import pagination from '@crud/Pagination'
-import { getData, syntkydata, createErweima } from '../../../api/system/tkyTestInformation'
+import { syntkydata, createErweima } from '../../../api/system/tkyTestInformation'
 
 const defaultForm = { id: null, xmid: null, xmname: null, bdid: null, bdname: null, gzwid: null, gzwname: null, gdid: null, gdname: null, gcid: null, gcname: null, sgdwid: null, sgdwname: null, jldwid: null, jldwname: null, jcdwid: null, jcdwname: null, jcff: null, syff: null, lxr: null, lxdh: null, byrq: null, jcsb: null, jxrq: null, jxzq: null, sgfzr: null, jcqslcbm: null, jcqslc1: null, jcqslc2: null, jcjslcbm: null, jcjslc1: null, jcjslc2: null, jccd: null, cqsl: null, jcbw: null, jcfs: null, jclx: null, zxbw: null, sjhd: null, tchd: null, sjqd: null, mgbh: null, mgzj: null, mglx: null, mgsl: null, wydj: null, sjmgcd: null, sjmgkbl: null, jzrq: null, shejmgcd: null, shejmgkbl: null, lqqdbg: null, syt: null, zjbg: null, zjbgjcyj: null, zjbgjj: null, zjbgjy: null, jcsjfj: null, jcsjfjscsj: null, sgdwfbzt: null, lczt: null, tjr: null, tjbz: null, tjsj: null, spyj: null, spr: null, spbz: null, spsj: null, bjfw: null, bjsl: null, bydbh: null, jcfxsj: null, jcfxr: null, jcyj: null, jcr: null, jcbz: null, jcsj: null, jcjdzt: null, jcjlbz: null, jcjl: null, jcjlfj: null, fhjcjg: null, fhspyj: null, fhspr: null, fhspbz: null, fhspsj: null, zt: null, fbsj: null, fbr: null, testType: null, holeMethod: null, concreteStrength: null, desighOrg: null, desighOrgName: null, inspectionOrg: null, inspectionOrgName: null, buildtype: null, createdate: null, createdatestr: null, zjbgjc: null }
 export default {

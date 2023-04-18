@@ -1,3 +1,4 @@
+<!--  隧道衬砌信息管理 -> 数据信息管理 -->
 <template>
   <div class="app-container">
     <!--工具栏-->
@@ -83,7 +84,7 @@
               type="primary"
               style="border-color: #FFBA00;color: #FFBA00"
               @click="uploadDZSData(scope.row)"
-            >上传至电子所</el-button>
+            >上传</el-button>
             <el-button
               slot="left"
               class="filter-item"
