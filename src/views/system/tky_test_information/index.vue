@@ -5,34 +5,34 @@
     <div class="head-container">
       <div v-if="crud.props.searchToggle">
         <!-- 搜索 -->
-        <label class="el-form-item-label">报验单id</label>
-        <el-input v-model="query.id" clearable placeholder="报验单id" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">项目id</label>
-        <el-input v-model="query.xmid" clearable placeholder="项目id" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <!--        <label class="el-form-item-label">报验单id</label>-->
+        <!--        <el-input v-model="query.id" clearable placeholder="报验单id" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
+        <!--        <label class="el-form-item-label">项目id</label>-->
+        <!--        <el-input v-model="query.xmid" clearable placeholder="项目id" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
         <label class="el-form-item-label">项目名称</label>
         <el-input v-model="query.xmname" clearable placeholder="项目名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">标段id</label>
-        <el-input v-model="query.bdid" clearable placeholder="标段id" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <!--        <label class="el-form-item-label">标段id</label>-->
+        <!--        <el-input v-model="query.bdid" clearable placeholder="标段id" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
         <label class="el-form-item-label">标段名称</label>
         <el-input v-model="query.bdname" clearable placeholder="标段名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">构筑物id</label>
-        <el-input v-model="query.gzwid" clearable placeholder="构筑物id" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <!--        <label class="el-form-item-label">构筑物id</label>-->
+        <!--        <el-input v-model="query.gzwid" clearable placeholder="构筑物id" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
         <label class="el-form-item-label">构筑物名称</label>
         <el-input v-model="query.gzwname" clearable placeholder="构筑物名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">工点id</label>
-        <el-input v-model="query.gdid" clearable placeholder="工点id" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <!--        <label class="el-form-item-label">工点id</label>-->
+        <!--        <el-input v-model="query.gdid" clearable placeholder="工点id" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
         <label class="el-form-item-label">工点名称</label>
         <el-input v-model="query.gdname" clearable placeholder="工点名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">施工单位id</label>
-        <el-input v-model="query.sgdwid" clearable placeholder="施工单位id" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <!--        <label class="el-form-item-label">施工单位id</label>-->
+        <!--        <el-input v-model="query.sgdwid" clearable placeholder="施工单位id" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
         <label class="el-form-item-label">施工单位名称</label>
         <el-input v-model="query.sgdwname" clearable placeholder="施工单位名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">监理单位id</label>
-        <el-input v-model="query.jldwid" clearable placeholder="监理单位id" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <!--        <label class="el-form-item-label">监理单位id</label>-->
+        <!--        <el-input v-model="query.jldwid" clearable placeholder="监理单位id" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
         <label class="el-form-item-label">监理单位名称</label>
         <el-input v-model="query.jldwname" clearable placeholder="监理单位名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">检测单位id</label>
-        <el-input v-model="query.jcdwid" clearable placeholder="检测单位id" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <!--        <label class="el-form-item-label">检测单位id</label>-->
+        <!--        <el-input v-model="query.jcdwid" clearable placeholder="检测单位id" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
         <label class="el-form-item-label">检测单位名称</label>
         <el-input v-model="query.jcdwname" clearable placeholder="检测单位名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">检测方法</label>
@@ -47,46 +47,46 @@
         <el-input v-model="query.byrq" clearable placeholder="预约检测日期" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">施工负责人</label>
         <el-input v-model="query.sgfzr" clearable placeholder="施工负责人" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">检测起始里程编码</label>
-        <el-input v-model="query.jcqslcbm" clearable placeholder="检测起始里程编码" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">检测起始里程1</label>
-        <el-input v-model="query.jcqslc1" clearable placeholder="检测起始里程1" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">检测起始里程编码</label>
-        <el-input v-model="query.jcjslcbm" clearable placeholder="检测起始里程编码" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">检测结束里程1</label>
-        <el-input v-model="query.jcjslc1" clearable placeholder="检测结束里程1" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">检测结束里程2</label>
-        <el-input v-model="query.jcjslc2" clearable placeholder="检测结束里程2" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">检测长度</label>
-        <el-input v-model="query.jccd" clearable placeholder="检测长度" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">检测部位</label>
-        <el-input v-model="query.jcbw" clearable placeholder="检测部位" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <!--        <label class="el-form-item-label">检测起始里程编码</label>-->
+        <!--        <el-input v-model="query.jcqslcbm" clearable placeholder="检测起始里程编码" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
+        <!--        <label class="el-form-item-label">检测起始里程1</label>-->
+        <!--        <el-input v-model="query.jcqslc1" clearable placeholder="检测起始里程1" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
+        <!--        <label class="el-form-item-label">检测起始里程编码</label>-->
+        <!--        <el-input v-model="query.jcjslcbm" clearable placeholder="检测起始里程编码" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
+        <!--        <label class="el-form-item-label">检测结束里程1</label>-->
+        <!--        <el-input v-model="query.jcjslc1" clearable placeholder="检测结束里程1" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
+        <!--        <label class="el-form-item-label">检测结束里程2</label>-->
+        <!--        <el-input v-model="query.jcjslc2" clearable placeholder="检测结束里程2" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
+        <!--        <label class="el-form-item-label">检测长度</label>-->
+        <!--        <el-input v-model="query.jccd" clearable placeholder="检测长度" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
+        <!--        <label class="el-form-item-label">检测部位</label>-->
+        <!--        <el-input v-model="query.jcbw" clearable placeholder="检测部位" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
         <label class="el-form-item-label">检测方式</label>
         <el-input v-model="query.jcfs" clearable placeholder="检测方式" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">检测类型</label>
         <el-input v-model="query.jclx" clearable placeholder="检测类型" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">围岩等级</label>
-        <el-input v-model="query.wydj" clearable placeholder="围岩等级" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">浇筑日期(施工日期)</label>
-        <el-input v-model="query.jzrq" clearable placeholder="浇筑日期(施工日期)" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">示意图</label>
-        <el-input v-model="query.syt" clearable placeholder="示意图" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">施工单位发布状态</label>
-        <el-input v-model="query.sgdwfbzt" clearable placeholder="施工单位发布状态" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">流程状态</label>
-        <el-input v-model="query.lczt" clearable placeholder="流程状态" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">提交备注（施工单位）</label>
-        <el-input v-model="query.tjbz" clearable placeholder="提交备注（施工单位）" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">报检单编号</label>
-        <el-input v-model="query.bydbh" clearable placeholder="报检单编号" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">检测进度状态</label>
-        <el-input v-model="query.jcjdzt" clearable placeholder="检测进度状态" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">检测结论备注</label>
-        <el-input v-model="query.jcjlbz" clearable placeholder="检测结论备注" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">发布状态</label>
-        <el-input v-model="query.zt" clearable placeholder="发布状态" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <label class="el-form-item-label">buildType</label>
-        <el-input v-model="query.buildtype" clearable placeholder="buildType" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
+        <!--        <label class="el-form-item-label">围岩等级</label>-->
+        <!--        <el-input v-model="query.wydj" clearable placeholder="围岩等级" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
+        <!--        <label class="el-form-item-label">浇筑日期(施工日期)</label>-->
+        <!--        <el-input v-model="query.jzrq" clearable placeholder="浇筑日期(施工日期)" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
+        <!--        <label class="el-form-item-label">示意图</label>-->
+        <!--        <el-input v-model="query.syt" clearable placeholder="示意图" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
+        <!--        <label class="el-form-item-label">施工单位发布状态</label>-->
+        <!--        <el-input v-model="query.sgdwfbzt" clearable placeholder="施工单位发布状态" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
+        <!--        <label class="el-form-item-label">流程状态</label>-->
+        <!--        <el-input v-model="query.lczt" clearable placeholder="流程状态" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
+        <!--        <label class="el-form-item-label">提交备注（施工单位）</label>-->
+        <!--        <el-input v-model="query.tjbz" clearable placeholder="提交备注（施工单位）" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
+        <!--        <label class="el-form-item-label">报检单编号</label>-->
+        <!--        <el-input v-model="query.bydbh" clearable placeholder="报检单编号" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
+        <!--        <label class="el-form-item-label">检测进度状态</label>-->
+        <!--        <el-input v-model="query.jcjdzt" clearable placeholder="检测进度状态" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
+        <!--        <label class="el-form-item-label">检测结论备注</label>-->
+        <!--        <el-input v-model="query.jcjlbz" clearable placeholder="检测结论备注" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
+        <!--        <label class="el-form-item-label">发布状态</label>-->
+        <!--        <el-input v-model="query.zt" clearable placeholder="发布状态" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
+        <!--        <label class="el-form-item-label">buildType</label>-->
+        <!--        <el-input v-model="query.buildtype" clearable placeholder="buildType" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />-->
         <rrOperation :crud="crud" />
       </div>
       <!--如果想在工具栏加入更多按钮，可以使用插槽方式， slot = 'left' or 'right'-->
