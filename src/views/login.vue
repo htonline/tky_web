@@ -7,8 +7,8 @@
         铁路工程管理平台
       </h3>
       -->
-      <el-form-item  m>
-       <img v-if="logo" :src="logo" class="sidebar-logo">
+      <el-form-item m>
+        <img v-if="logo" :src="logo" class="sidebar-logo">
       </el-form-item>
       <el-form-item prop="username">
         <el-input v-model="loginForm.username" type="text" auto-complete="off" placeholder="账号">
@@ -40,7 +40,7 @@
     </el-form>
     <!--  底部 -->
     <div v-if="$store.state.settings.showFooter" id="el-login-footer">
-     <!-- <span v-html="$store.state.settings.footerTxt" />-->
+      <!-- <span v-html="$store.state.settings.footerTxt" />-->
       <span> ⋅ </span>
       <!--<a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">{{ $store.state.settings.caseNumber }}</a> -->
       <a href="" target="_blank">备案号</a>
@@ -126,6 +126,7 @@ export default {
       }
     },
     handleLogin() {
+      // 如果登录表单有效
       this.$refs.loginForm.validate(valid => {
         const user = {
           username: this.loginForm.username,
@@ -134,11 +135,13 @@ export default {
           code: this.loginForm.code,
           uuid: this.loginForm.uuid
         }
+        // 给密码加密
         if (user.password !== this.cookiePass) {
           user.password = encrypt(user.password)
         }
         if (valid) {
           this.loading = true
+          // 如果点了记住我
           if (user.rememberMe) {
             Cookies.set('username', user.username, { expires: Config.passCookieExpires })
             Cookies.set('password', user.password, { expires: Config.passCookieExpires })
@@ -148,6 +151,7 @@ export default {
             Cookies.remove('password')
             Cookies.remove('rememberMe')
           }
+          // 跳转
           this.$store.dispatch('Login', user).then(() => {
             this.loading = false
             this.$router.push({ path: this.redirect || '/' })

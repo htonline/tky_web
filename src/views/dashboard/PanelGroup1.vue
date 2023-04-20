@@ -1,5 +1,6 @@
+<!--首页板块-->
 <template>
-  <el-row :gutter="40" class="panel-group" >
+  <el-row :gutter="40" class="panel-group">
 
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('shoppings')">
@@ -113,6 +114,9 @@ import CountTo from 'vue-count-to'
 import { selectParam } from '@/api/system/tunnelInformation'
 
 export default {
+  components: {
+    CountTo
+  },
   data() {
     return {
       th1: 0,
@@ -125,11 +129,9 @@ export default {
       th8: 0
     }
   },
-  components: {
-    CountTo
-  },
   mounted: function() {
     selectParam().then(response => {
+      console.log('response', response)
       this.th1 = response.tunnelNumner
       this.th2 = response.tunnelLength
       this.th3 = response.finishlength
@@ -138,7 +140,7 @@ export default {
       this.th6 = response.yichuliquexian
       this.th7 = response.weichuliquexian
       this.th8 = response.jiancelv
-      //this.$confirm(response)
+      // this.$confirm(response)
     })
   },
   methods: {

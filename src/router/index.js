@@ -23,6 +23,7 @@ router.beforeEach((to, from, next) => {
       NProgress.done()
     } else {
       if (store.getters.roles.length === 0) { // 判断当前用户是否已拉取完user_info信息
+        // 通过用户的角色返回相应的菜单路由
         store.dispatch('GetInfo').then(() => { // 拉取user_info
           // 动态路由，拉取菜单
           loadMenus(next, to)
@@ -53,10 +54,7 @@ router.beforeEach((to, from, next) => {
 
 export const loadMenus = (next, to) => {
   buildMenus().then(res => {
-    console.log('buildMenus', res)
-    res[0].children[0].meta.title = '报验单'
-    res[0].children[1].meta.title = '数据信息管理'
-    console.log('buildMenus', res)
+    console.log('buidlMenus', res)
     const sdata = JSON.parse(JSON.stringify(res))
     const rdata = JSON.parse(JSON.stringify(res))
     const sidebarRoutes = filterAsyncRouter(sdata)
