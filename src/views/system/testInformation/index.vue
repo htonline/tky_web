@@ -1,4 +1,5 @@
 <template>
+  <!--  隧道衬砌信息管理 - 报检管理 -->
   <div class="app-container">
     <!--工具栏-->
     <div class="head-container">
@@ -53,7 +54,7 @@
         <rrOperation :crud="crud" />
       </div>
       <!--如果想在工具栏加入更多按钮，可以使用插槽方式， slot = 'left' or 'right'-->
-      <crudOperation :permission="permission" >
+      <crudOperation :permission="permission">
         <!--表单组件-->
         <!-- 新增 -->
         <el-button
@@ -66,8 +67,7 @@
           @click="lookTunnelMess()"
         >新增
         </el-button>
-        <div class="user-right">
-        </div>
+        <div class="user-right" />
       </crudOperation>
       <el-dialog :close-on-click-modal="false" :before-close="crud.cancelCU" :visible.sync="crud.status.cu > 0" :title="crud.status.title" width="1000px">
         <el-form ref="form" :model="form" :rules="rules" size="small" label-width="80px">
@@ -76,41 +76,41 @@
               <el-divider>隧道基本信息</el-divider>
             </div>
           </el-row>
-          <el-row >
+          <el-row>
             <el-col :span="7">
-              <el-form-item >
+              <el-form-item>
                 <div class="sub-title">项目名称</div>
-                <el-input v-model="form.projectName" style="width: 250px;" ></el-input>
+                <el-input v-model="form.projectName" style="width: 250px;" />
               </el-form-item>
             </el-col>
             <el-col :span="7">
-              <el-form-item >
+              <el-form-item>
                 <div class="sub-title">标段名称</div>
                 <el-input v-model="form.sectionName" style="width: 250px;" />
               </el-form-item>
             </el-col>
             <el-col :span="7">
-              <el-form-item >
+              <el-form-item>
                 <div class="sub-title">隧道名称</div>
                 <el-input v-model="form.tunnelName" style="width: 250px;" />
               </el-form-item>
             </el-col>
           </el-row>
-          <el-row >
+          <el-row>
             <el-col :span="7">
-              <el-form-item >
+              <el-form-item>
                 <div class="sub-title">工点名称</div>
                 <el-input v-model="form.worksiteName" style="width: 250px;" />
               </el-form-item>
             </el-col>
             <el-col :span="7">
-              <el-form-item >
+              <el-form-item>
                 <div class="sub-title">待检区段起始里程</div>
                 <el-input v-model="form.beizhu2" style="width: 250px;" />
               </el-form-item>
             </el-col>
             <el-col :span="7">
-              <el-form-item >
+              <el-form-item>
                 <div class="sub-title">待检区段结束里程</div>
                 <el-input v-model="form.beizhu3" style="width: 250px;" />
               </el-form-item>
@@ -118,7 +118,7 @@
           </el-row>
           <el-row>
             <el-col :span="8">
-              <el-form-item >
+              <el-form-item>
                 <div class="sub-title">待检区段长度</div>
                 <el-input v-model="form.beizhu4" style="width: 250px;" />
               </el-form-item>
@@ -129,9 +129,9 @@
               <el-divider>初始化基本信息</el-divider>
             </div>
           </el-row>
-          <el-row >
+          <el-row>
             <el-col :span="7">
-              <el-form-item >
+              <el-form-item>
                 <div class="sub-title">围岩类型</div>
                 <el-input v-model="form.wallRockType" style="width: 250px;" />
               </el-form-item>
@@ -149,7 +149,7 @@
               </el-form-item>
             </el-col>
           </el-row>
-          <el-row >
+          <el-row>
             <el-col :span="7">
               <el-form-item label="">
                 <div class="sub-title">钢筋网间距(cm)</div>
@@ -200,92 +200,90 @@
               <el-divider>衬砌报检基本信息</el-divider>
             </div>
           </el-row>
-          <el-row >
+          <el-row>
             <el-col :span="5">
-              <el-form-item >
-                <div class="sub-title" >施工单位</div>
-                <el-input v-model="form.beizhu5" style="width: 180px;" >{{ user.nickName }}</el-input>
+              <el-form-item>
+                <div class="sub-title">施工单位</div>
+                <el-input v-model="form.beizhu5" style="width: 180px;">{{ user.nickName }}</el-input>
               </el-form-item>
             </el-col>
             <el-col :span="5">
-              <el-form-item >
+              <el-form-item>
                 <div class="sub-title">联系人</div>
-                <el-input v-model="form.beizhu6" style="width: 180px;" >{{ user.username }}</el-input>
+                <el-input v-model="form.beizhu6" style="width: 180px;">{{ user.username }}</el-input>
               </el-form-item>
             </el-col>
             <el-col :span="5">
-              <el-form-item >
+              <el-form-item>
                 <div class="sub-title">联系方式</div>
                 <el-input v-model="form.beizhu7" style="width: 180px;" />
               </el-form-item>
             </el-col>
             <el-col :span="5">
-              <el-form-item >
+              <el-form-item>
                 <div class="sub-title">检测单位</div>
                 <!-- <el-input v-model="defaultForms.beizhu8" style="width: 170px;" />   -->
                 <el-select
                   v-model="form.beizhu8"
                   placeholder="选择检测单位"
                   clearable
-                  @focus="handleQuery"
                   style="width: 170px;"
+                  @focus="handleQuery"
                 >
                   <el-option
                     v-for="item in dishesInfoList"
                     :key="item.nickName"
                     :value="item.nickName"
                     :label="item.nickName"
-                  >
-                  </el-option>
+                  />
                 </el-select>
               </el-form-item>
             </el-col>
           </el-row>
-          <el-row >
+          <el-row>
             <el-col :span="5">
-              <el-form-item >
+              <el-form-item>
                 <div class="sub-title">监理单位</div>
                 <!-- <el-input v-model="defaultForms.beizhu9" style="width: 180px;" /> -->
                 <el-select
                   v-model="form.beizhu9"
                   placeholder="选择监理单位"
                   clearable
-                  @focus="handleQuery1"
                   style="width: 170px;"
+                  @focus="handleQuery1"
                 >
                   <el-option
                     v-for="item in dishesInfoList1"
                     :key="item.nickName"
                     :value="item.nickName"
                     :label="item.nickName"
-                  >
-                  </el-option>
+                  />
                 </el-select>
               </el-form-item>
             </el-col>
             <el-col :span="4">
-              <el-form-item >
+              <el-form-item>
                 <div class="sub-title">检测方式</div>
-                <el-select v-model="form.beizhu10" clearable placeholder="请选择" style="width: 150px;" >
+                <el-select v-model="form.beizhu10" clearable placeholder="请选择" style="width: 150px;">
                   <el-option
                     v-for="item in options"
                     :key="item.value"
                     :label="item.label"
-                    :value="item.value">
-                  </el-option>
+                    :value="item.value"
+                  />
                 </el-select>
               </el-form-item>
             </el-col>
             <el-col :span="4">
-              <el-form-item >
+              <el-form-item>
                 <div class="sub-title">检测方法</div>
-                <el-select v-model="form.beizhu11" clearable placeholder="请选择" style="width: 150px;" >
+                <el-select v-model="form.beizhu11" clearable placeholder="请选择" style="width: 150px;">
                   <el-option
                     v-for="item in options1"
                     :key="item.value"
                     :label="item.label"
-                    :value="item.value">
-                  </el-option>
+                    :value="item.value"
+                  />
                 </el-select>
               </el-form-item>
             </el-col>
@@ -295,8 +293,8 @@
                 <el-date-picker
                   v-model="form.testTime"
                   type="datetime"
-                  placeholder="选择日期时间">
-                </el-date-picker>
+                  placeholder="选择日期时间"
+                />
               </el-form-item>
             </el-col>
           </el-row>
@@ -314,20 +312,20 @@
                 <el-date-picker
                   v-model="form.beizhu13"
                   type="datetime"
-                  placeholder="选择日期时间">
-                </el-date-picker>
+                  placeholder="选择日期时间"
+                />
               </el-form-item>
             </el-col>
             <el-col :span="7">
               <el-form-item label="">
                 <div class="sub-title">起始里程</div>
-                <el-input  style="width: 60px;" disabled value="DK" /> <el-input v-model="form.beizhu16" style="width: 60px;" /><span> + </span><el-input v-model="form.beizhu14" style="width: 60px;" />
+                <el-input style="width: 60px;" disabled value="DK" /> <el-input v-model="form.beizhu16" style="width: 60px;" /><span> + </span><el-input v-model="form.beizhu14" style="width: 60px;" />
               </el-form-item>
             </el-col>
             <el-col :span="7">
               <el-form-item label="">
                 <div class="sub-title">结束里程</div>
-                <el-input  style="width: 60px;" disabled value="DK" /> <el-input v-model="form.beizhu17" style="width: 60px;" /><span> + </span><el-input v-model="form.beizhu15" style="width: 60px;" />
+                <el-input style="width: 60px;" disabled value="DK" /> <el-input v-model="form.beizhu17" style="width: 60px;" /><span> + </span><el-input v-model="form.beizhu15" style="width: 60px;" />
               </el-form-item>
             </el-col>
             <el-col :span="5">
@@ -345,19 +343,19 @@
         </div>
       </el-dialog>
       <!--表格渲染-->
-      <el-table ref="table" v-loading="crud.loading" :data="crud.data" size="small" style="width: 100%;"  @selection-change="crud.selectionChangeHandler">
+      <el-table ref="table" v-loading="crud.loading" :data="crud.data" size="small" style="width: 100%;" @selection-change="crud.selectionChangeHandler">
         <el-table-column type="selection" width="55" />
         <!--
         <el-table-column prop="testInforId" label="ID" />
 
         <el-table-column prop="" label="状态" />
         -->
-        <el-table-column prop="beizhu26" label="检测报告" >
+        <el-table-column prop="beizhu26" label="检测报告">
           <template slot-scope="scope">
             <el-button mutilline="true" type="text" @click="updateDetectionSummaryDialog(scope.row)">上传</el-button>
             <el-button mutilline="true" type="text" @click="downloadDetectionSummary(scope.row,scope.row.beizhu26)">下载</el-button>
             {{ scope.row.beizhu26 }}
-            <el-dialog append-to-body :close-on-click-modal="false"  :visible.sync="uploadDetectionSummaryDialogIs" :title="crud.status.add ? '文件上传' : '编辑文件'" width="500px">
+            <el-dialog append-to-body :close-on-click-modal="false" :visible.sync="uploadDetectionSummaryDialogIs" :title="crud.status.add ? '文件上传' : '编辑文件'" width="500px">
               <el-form ref="form" :model="form" size="small" label-width="80px">
                 <el-form-item label="上传">
                   <!--   上传文件   -->
@@ -369,7 +367,7 @@
                     :headers="headers"
                     :on-success="handleSuccess"
                     :on-error="handleError"
-                    :action=updateDetectionSummaryPath
+                    :action="updateDetectionSummaryPath"
                     :data="{data:dataid}"
                   >
                     <div class="eladmin-upload" onclick=""><i class="el-icon-upload" /> 添加文件</div>
@@ -396,10 +394,10 @@
         <el-table-column prop="wallRockType" label="围岩类型" />
         <el-table-column prop="supportTickness" label="初支厚度" />
         <el-table-column prop="separationDistance" label="间距(m/榀)" />
-        <el-table-column prop="meshDistance" label="钢筋网间距"/>
+        <el-table-column prop="meshDistance" label="钢筋网间距" />
         <el-table-column prop="annularBarDistance" label="环向钢筋间距" />
         <el-table-column prop="reinforPrtTickness" label="钢筋保护厚度" />
-        <el-table-column prop="reinforPrtTickness" label="二次衬砌厚度"  align="center">
+        <el-table-column prop="reinforPrtTickness" label="二次衬砌厚度" align="center">
           <el-table-column prop="secLineArchTickness" label="拱部" />
           <el-table-column prop="secLineWallTickness" label="边墙" />
           <el-table-column prop="secLineInverArchTickness" label="仰拱" />
@@ -423,11 +421,11 @@
         <el-table-column prop="beizhu14" label="beizhu14" />
         <el-table-column prop="beizhu15" label="beizhu15" />
         -->
-        <el-table-column  label="审核" width="150px" align="center">
+        <el-table-column label="审核" width="150px" align="center">
           <template slot-scope="scope">
             <el-button
-              v-permission="['admin','testInformation:JianceCheck']"
               slot="right"
+              v-permission="['admin','testInformation:JianceCheck']"
               class="filter-item"
               size="mini"
               type="warning"
@@ -435,8 +433,8 @@
               @click="JianceCheck(scope.row)"
             >检测单位审核</el-button>
             <el-button
-              v-permission="['admin','testInformation:JiliCheck']"
               slot="right"
+              v-permission="['admin','testInformation:JiliCheck']"
               class="filter-item"
               size="mini"
               type="warning"
@@ -444,8 +442,8 @@
               @click="JianliCheck(scope.row)"
             >监理单位审核</el-button>
             <el-button
-              v-permission="['admin','testInformation:SigongCheck']"
               slot="right"
+              v-permission="['admin','testInformation:SigongCheck']"
               class="filter-item"
               size="mini"
               type="warning"
@@ -457,8 +455,8 @@
         <el-table-column v-if="checkPer(['testInformation:edit','testInformation:del','testInformation:createErweima'])" label="操作" width="150px" align="center">
           <template slot-scope="scope">
             <el-button
-              v-permission="['admin','testInformation:createErweima']"
               slot="right"
+              v-permission="['admin','testInformation:createErweima']"
               class="filter-item"
               size="mini"
               type="info"
@@ -483,9 +481,9 @@
           <el-input v-model="query.tunnelId" clearable placeholder="隧道编号" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
           <label class="el-form-item-label">隧道名称</label>
           <el-input v-model="query.tunnelName" clearable placeholder="隧道名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-          <rrOperation :crud="crud"  />
+          <rrOperation :crud="crud" />
         </div>
-        <el-table ref="table" v-loading="crud.loading" :data=DataList  style="width: 100%;" @selection-change="crud.selectionChangeHandler">
+        <el-table ref="table" v-loading="crud.loading" :data="DataList" style="width: 100%;" @selection-change="crud.selectionChangeHandler">
           <el-table-column prop="tunnelInforId" label="序号" />
           <el-table-column prop="projectName" label="项目名称" />
           <el-table-column prop="sectionName" label="标段名称" />
@@ -495,8 +493,8 @@
           <el-table-column prop="tunnelStartingDistance" label="隧道起始里程" />
           <el-table-column prop="tunnelEndingDistance" label="隧道结束里程" />
           <el-table-column prop="tunnelLength" label="隧道长度" />
-          <el-table-column label="状态" width="170px" align="center" prop="beizhu4"/>
-          <el-table-column  label="附件材料" width="150px" align="center">
+          <el-table-column label="状态" width="170px" align="center" prop="beizhu4" />
+          <el-table-column label="附件材料" width="150px" align="center">
             <template slot-scope="scopes">
               <el-button
                 class="filter-item"
@@ -516,11 +514,11 @@
       <!--分页组件-->
       <pagination />
     </div>
-    <el-dialog :visible.sync="openTuneldialog" :close-on-click-modal="false"  title="隧道信息" append-to-body width="1300px" @closed="cancelOpenTuneldialog">
+    <el-dialog :visible.sync="openTuneldialog" :close-on-click-modal="false" title="隧道信息" append-to-body width="1300px" @closed="cancelOpenTuneldialog">
       <div class="head-container">
-        <div >
+        <div>
           <label class="el-form-item-label">隧道名称</label>
-          <el-input v-model="query.tunnelName" clearable placeholder="隧道名称" style="width: 185px;" class="filter-item" ref="tunnelName"/>
+          <el-input ref="tunnelName" v-model="query.tunnelName" clearable placeholder="隧道名称" style="width: 185px;" class="filter-item" />
           <el-button class="filter-item" size="mini" type="success" icon="el-icon-search" @click="serach()">搜索</el-button>
         </div>
         <!--如果想在工具栏加入更多按钮，可以使用插槽方式， slot = 'left' or 'right'-->
@@ -535,7 +533,7 @@
         <el-table-column prop="tunnelStartingDistance" label="隧道起始里程" />
         <el-table-column prop="tunnelEndingDistance" label="隧道结束里程" />
         <el-table-column prop="tunnelLength" label="隧道长度" />
-        <el-table-column  label="附件材料" width="150px" align="center">
+        <el-table-column label="附件材料" width="150px" align="center">
           <template slot-scope="scope">
             <el-button
               class="filter-item"
@@ -547,12 +545,12 @@
             >查看</el-button>
           </template>
         </el-table-column>
-        <el-table-column label="状态" width="170px" align="center" prop="beizhu4"/>
-        <el-table-column  label="操作" width="150px" align="center">
+        <el-table-column label="状态" width="170px" align="center" prop="beizhu4" />
+        <el-table-column label="操作" width="150px" align="center">
           <template slot-scope="scope">
             <el-button
-              class="filter-item"
               v-permission="['admin','testInformation:createTest']"
+              class="filter-item"
               size="mini"
               type="warning"
               icon="el-icon-tickets"
@@ -566,7 +564,7 @@
       <pagination />
     </el-dialog>
     <el-dialog title="附件材料" :visible.sync="TunnelInfoDialog">
-      <el-table ref="table" v-loading="crud.loading" :data=DataList style="width: 100%;" @selection-change="crud.selectionChangeHandler">
+      <el-table ref="table" v-loading="crud.loading" :data="DataList" style="width: 100%;" @selection-change="crud.selectionChangeHandler">
         <el-table-column prop="name" label="文件名">
           <template slot-scope="scope">
             <el-popover
@@ -583,7 +581,7 @@
                 style="word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color: #1890ff;font-size: 13px;"
                 target="_blank"
               >
-                {{ scope.row.realName}}
+                {{ scope.row.realName }}
               </a>
             </el-popover>
           </template>
@@ -607,48 +605,48 @@
         <el-table-column prop="createTime" label="上传日期" />
       </el-table>
     </el-dialog>
-    <el-dialog :close-on-click-modal="false"  :visible.sync="BaojianDialog" title="新增报检单" width="1000px" :show-close="false" @closed="delmmess(defaultForms)">
-      <el-form ref="defaultForms"  :model="defaultForms" :rules="rules"   size="small" label-width="80px">
+    <el-dialog :close-on-click-modal="false" :visible.sync="BaojianDialog" title="新增报检单" width="1000px" :show-close="false" @closed="delmmess(defaultForms)">
+      <el-form ref="defaultForms" :model="defaultForms" :rules="rules" size="small" label-width="80px">
         <el-row>
           <div>
             <el-divider>隧道基本信息</el-divider>
           </div>
         </el-row>
-        <el-row >
+        <el-row>
           <el-col :span="7">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">项目名称</div>
-              <el-input v-model="defaultForms.projectName" style="width: 250px;" ></el-input>
+              <el-input v-model="defaultForms.projectName" style="width: 250px;" />
             </el-form-item>
           </el-col>
           <el-col :span="7">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">标段名称</div>
               <el-input v-model="defaultForms.sectionName" style="width: 250px;" />
             </el-form-item>
           </el-col>
           <el-col :span="7">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">隧道名称</div>
               <el-input v-model="defaultForms.tunnelName" style="width: 250px;" />
             </el-form-item>
           </el-col>
         </el-row>
-        <el-row >
+        <el-row>
           <el-col :span="7">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">工点名称</div>
               <el-input v-model="defaultForms.worksiteName" style="width: 250px;" />
             </el-form-item>
           </el-col>
           <el-col :span="7">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">待检区段起始里程</div>
               <el-input v-model="defaultForms.beizhu2" style="width: 250px;" />
             </el-form-item>
           </el-col>
           <el-col :span="7">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">待检区段结束里程</div>
               <el-input v-model="defaultForms.beizhu3" style="width: 250px;" />
             </el-form-item>
@@ -656,7 +654,7 @@
         </el-row>
         <el-row>
           <el-col :span="8">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">待检区段长度</div>
               <el-input v-model="defaultForms.beizhu4" style="width: 250px;" />
             </el-form-item>
@@ -667,9 +665,9 @@
             <el-divider>初始化基本信息</el-divider>
           </div>
         </el-row>
-        <el-row >
+        <el-row>
           <el-col :span="7">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">围岩类型</div>
               <el-input v-model="defaultForms.wallRockType" style="width: 250px;" />
             </el-form-item>
@@ -687,7 +685,7 @@
             </el-form-item>
           </el-col>
         </el-row>
-        <el-row >
+        <el-row>
           <el-col :span="7">
             <el-form-item label="">
               <div class="sub-title">钢筋网间距(cm)</div>
@@ -738,92 +736,90 @@
             <el-divider>衬砌报检基本信息</el-divider>
           </div>
         </el-row>
-        <el-row >
+        <el-row>
           <el-col :span="5">
-            <el-form-item >
-              <div class="sub-title" >施工单位</div>
-              <el-input v-model="defaultForms.beizhu5" style="width: 180px;" >{{ user.nickName }}</el-input>
+            <el-form-item>
+              <div class="sub-title">施工单位</div>
+              <el-input v-model="defaultForms.beizhu5" style="width: 180px;">{{ user.nickName }}</el-input>
             </el-form-item>
           </el-col>
           <el-col :span="5">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">联系人</div>
-              <el-input v-model="defaultForms.beizhu6" style="width: 180px;" >{{ user.username }}</el-input>
+              <el-input v-model="defaultForms.beizhu6" style="width: 180px;">{{ user.username }}</el-input>
             </el-form-item>
           </el-col>
           <el-col :span="5">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">联系方式</div>
               <el-input v-model="defaultForms.beizhu7" style="width: 180px;" />
             </el-form-item>
           </el-col>
           <el-col :span="5">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">检测单位</div>
               <!-- <el-input v-model="defaultForms.beizhu8" style="width: 170px;" />   -->
               <el-select
                 v-model="defaultForms.beizhu8"
                 placeholder="选择检测单位"
                 clearable
-                @focus="handleQuery()"
                 style="width: 170px;"
+                @focus="handleQuery()"
               >
                 <el-option
                   v-for="item in dishesInfoList"
                   :key="item.nickName"
                   :value="item.nickName"
                   :label="item.nickName"
-                >
-                </el-option>
+                />
               </el-select>
             </el-form-item>
           </el-col>
         </el-row>
-        <el-row >
+        <el-row>
           <el-col :span="5">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">监理单位</div>
               <!-- <el-input v-model="defaultForms.beizhu9" style="width: 180px;" /> -->
               <el-select
                 v-model="defaultForms.beizhu9"
                 placeholder="选择监理单位"
                 clearable
-                @focus="handleQuery1()"
                 style="width: 170px;"
+                @focus="handleQuery1()"
               >
                 <el-option
                   v-for="item in dishesInfoList1"
                   :key="item.nickName"
                   :value="item.nickName"
                   :label="item.nickName"
-                >
-                </el-option>
+                />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="4">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">检测方式</div>
-              <el-select v-model="defaultForms.beizhu10" clearable placeholder="请选择" style="width: 150px;" >
+              <el-select v-model="defaultForms.beizhu10" clearable placeholder="请选择" style="width: 150px;">
                 <el-option
                   v-for="item in options"
                   :key="item.value"
                   :label="item.label"
-                  :value="item.value">
-                </el-option>
+                  :value="item.value"
+                />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="4">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">检测方法</div>
-              <el-select v-model="defaultForms.beizhu11" clearable placeholder="请选择" style="width: 150px;" >
+              <el-select v-model="defaultForms.beizhu11" clearable placeholder="请选择" style="width: 150px;">
                 <el-option
                   v-for="item in options1"
                   :key="item.value"
                   :label="item.label"
-                  :value="item.value">
-                </el-option>
+                  :value="item.value"
+                />
               </el-select>
             </el-form-item>
           </el-col>
@@ -833,8 +829,8 @@
               <el-date-picker
                 v-model="defaultForms.testTime"
                 type="datetime"
-                placeholder="选择日期时间">
-              </el-date-picker>
+                placeholder="选择日期时间"
+              />
             </el-form-item>
           </el-col>
         </el-row>
@@ -852,20 +848,20 @@
               <el-date-picker
                 v-model="defaultForms.beizhu13"
                 type="datetime"
-                placeholder="选择日期时间">
-              </el-date-picker>
+                placeholder="选择日期时间"
+              />
             </el-form-item>
           </el-col>
           <el-col :span="7">
             <el-form-item label="">
               <div class="sub-title">起始里程</div>
-              <el-input  style="width: 60px;" disabled value="DK" /> <el-input v-model="defaultForms.beizhu16" style="width: 60px;" /><span> + </span><el-input v-model="defaultForms.beizhu14" style="width: 60px;" />
+              <el-input style="width: 60px;" disabled value="DK" /> <el-input v-model="defaultForms.beizhu16" style="width: 60px;" /><span> + </span><el-input v-model="defaultForms.beizhu14" style="width: 60px;" />
             </el-form-item>
           </el-col>
           <el-col :span="7">
             <el-form-item label="">
               <div class="sub-title">结束里程</div>
-              <el-input  style="width: 60px;" disabled value="DK" /> <el-input v-model="defaultForms.beizhu17" style="width: 60px;" /><span> + </span><el-input v-model="defaultForms.beizhu15" style="width: 60px;" />
+              <el-input style="width: 60px;" disabled value="DK" /> <el-input v-model="defaultForms.beizhu17" style="width: 60px;" /><span> + </span><el-input v-model="defaultForms.beizhu15" style="width: 60px;" />
             </el-form-item>
           </el-col>
           <el-col :span="5">
@@ -882,48 +878,48 @@
         <el-button :loading="crud.status.cu === 2" type="primary" @click="submitForm(defaultForms)">提交报检单</el-button>
       </div>
     </el-dialog>
-    <el-dialog :close-on-click-modal="false"  :visible.sync="shigongdanweiShenHeDialog" title="查看报检单审核进度" width="1000px" >
-      <el-form ref="defaultForms"  :model="defaultForms" :rules="rules"   size="small" label-width="80px">
+    <el-dialog :close-on-click-modal="false" :visible.sync="shigongdanweiShenHeDialog" title="查看报检单审核进度" width="1000px">
+      <el-form ref="defaultForms" :model="defaultForms" :rules="rules" size="small" label-width="80px">
         <el-row>
           <div>
             <el-divider>隧道基本信息</el-divider>
           </div>
         </el-row>
-        <el-row >
+        <el-row>
           <el-col :span="7">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">项目名称</div>
-              <el-input v-model="defaultForms.projectName" style="width: 250px;" ></el-input>
+              <el-input v-model="defaultForms.projectName" style="width: 250px;" />
             </el-form-item>
           </el-col>
           <el-col :span="7">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">标段名称</div>
               <el-input v-model="defaultForms.sectionName" style="width: 250px;" />
             </el-form-item>
           </el-col>
           <el-col :span="7">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">隧道名称</div>
               <el-input v-model="defaultForms.tunnelName" style="width: 250px;" />
             </el-form-item>
           </el-col>
         </el-row>
-        <el-row >
+        <el-row>
           <el-col :span="7">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">工点名称</div>
               <el-input v-model="defaultForms.worksiteName" style="width: 250px;" />
             </el-form-item>
           </el-col>
           <el-col :span="7">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">待检区段起始里程</div>
               <el-input v-model="defaultForms.beizhu2" style="width: 250px;" />
             </el-form-item>
           </el-col>
           <el-col :span="7">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">待检区段结束里程</div>
               <el-input v-model="defaultForms.beizhu3" style="width: 250px;" />
             </el-form-item>
@@ -931,103 +927,101 @@
         </el-row>
         <el-row>
           <el-col :span="8">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">待检区段长度</div>
               <el-input v-model="defaultForms.beizhu4" style="width: 250px;" />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
-        <div>
+          <div>
             <el-divider>衬砌报检基本信息</el-divider>
           </div>
         </el-row>
-        <el-row >
+        <el-row>
           <el-col :span="5">
-            <el-form-item >
-              <div class="sub-title" >施工单位</div>
-              <el-input v-model="defaultForms.beizhu5" style="width: 180px;" >{{ user.nickName }}</el-input>
+            <el-form-item>
+              <div class="sub-title">施工单位</div>
+              <el-input v-model="defaultForms.beizhu5" style="width: 180px;">{{ user.nickName }}</el-input>
             </el-form-item>
           </el-col>
           <el-col :span="5">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">联系人</div>
-              <el-input v-model="defaultForms.beizhu6" style="width: 180px;" >{{ user.username }}</el-input>
+              <el-input v-model="defaultForms.beizhu6" style="width: 180px;">{{ user.username }}</el-input>
             </el-form-item>
           </el-col>
           <el-col :span="5">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">联系方式</div>
               <el-input v-model="defaultForms.beizhu7" style="width: 180px;" />
             </el-form-item>
           </el-col>
           <el-col :span="5">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">检测单位</div>
               <!-- <el-input v-model="defaultForms.beizhu8" style="width: 170px;" />   -->
               <el-select
                 v-model="defaultForms.beizhu8"
                 placeholder="选择检测单位"
                 clearable
-                @focus="handleQuery"
                 style="width: 170px;"
+                @focus="handleQuery"
               >
                 <el-option
                   v-for="item in dishesInfoList"
                   :key="item.nickName"
                   :value="item.nickName"
                   :label="item.nickName"
-                >
-                </el-option>
+                />
               </el-select>
             </el-form-item>
           </el-col>
         </el-row>
-        <el-row >
+        <el-row>
           <el-col :span="5">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">监理单位</div>
               <!-- <el-input v-model="defaultForms.beizhu9" style="width: 180px;" /> -->
               <el-select
                 v-model="defaultForms.beizhu9"
                 placeholder="选择监理单位"
                 clearable
-                @focus="handleQuery1"
                 style="width: 170px;"
+                @focus="handleQuery1"
               >
                 <el-option
                   v-for="item in dishesInfoList1"
                   :key="item.nickName"
                   :value="item.nickName"
                   :label="item.nickName"
-                >
-                </el-option>
+                />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="4">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">检测方式</div>
-              <el-select v-model="defaultForms.beizhu10" clearable placeholder="请选择" style="width: 150px;" >
+              <el-select v-model="defaultForms.beizhu10" clearable placeholder="请选择" style="width: 150px;">
                 <el-option
                   v-for="item in options"
                   :key="item.value"
                   :label="item.label"
-                  :value="item.value">
-                </el-option>
+                  :value="item.value"
+                />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="4">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">检测方法</div>
-              <el-select v-model="defaultForms.beizhu11" clearable placeholder="请选择" style="width: 150px;" >
+              <el-select v-model="defaultForms.beizhu11" clearable placeholder="请选择" style="width: 150px;">
                 <el-option
                   v-for="item in options1"
                   :key="item.value"
                   :label="item.label"
-                  :value="item.value">
-                </el-option>
+                  :value="item.value"
+                />
               </el-select>
             </el-form-item>
           </el-col>
@@ -1037,8 +1031,8 @@
               <el-date-picker
                 v-model="defaultForms.testTime"
                 type="datetime"
-                placeholder="选择日期时间">
-              </el-date-picker>
+                placeholder="选择日期时间"
+              />
             </el-form-item>
           </el-col>
         </el-row>
@@ -1056,20 +1050,20 @@
               <el-date-picker
                 v-model="defaultForms.beizhu13"
                 type="datetime"
-                placeholder="选择日期时间">
-              </el-date-picker>
+                placeholder="选择日期时间"
+              />
             </el-form-item>
           </el-col>
           <el-col :span="7">
             <el-form-item label="">
               <div class="sub-title">起始里程</div>
-              <el-input  style="width: 60px;" disabled value="DK" /> <el-input v-model="defaultForms.beizhu16" style="width: 60px;" /><span> + </span><el-input v-model="defaultForms.beizhu14" style="width: 60px;" />
+              <el-input style="width: 60px;" disabled value="DK" /> <el-input v-model="defaultForms.beizhu16" style="width: 60px;" /><span> + </span><el-input v-model="defaultForms.beizhu14" style="width: 60px;" />
             </el-form-item>
           </el-col>
           <el-col :span="7">
             <el-form-item label="">
               <div class="sub-title">结束里程</div>
-              <el-input  style="width: 60px;" disabled value="DK" /> <el-input v-model="defaultForms.beizhu17" style="width: 60px;" /><span> + </span><el-input v-model="defaultForms.beizhu15" style="width: 60px;" />
+              <el-input style="width: 60px;" disabled value="DK" /> <el-input v-model="defaultForms.beizhu17" style="width: 60px;" /><span> + </span><el-input v-model="defaultForms.beizhu15" style="width: 60px;" />
             </el-form-item>
           </el-col>
           <el-col :span="5">
@@ -1084,219 +1078,14 @@
             <el-divider>确认检测计划</el-divider>
           </div>
         </el-row>
-        <el-row >
+        <el-row>
           <el-container>
-            <el-col :span="10" >
+            <el-col :span="10">
               <el-form-item>
-            <el-aside width="200px"  align="center">审核流程</el-aside>
+                <el-aside width="200px" align="center">审核流程</el-aside>
               </el-form-item>
             </el-col>
-            <el-col >
-              <el-form-item>
-            <el-main>
-              <div class="block">
-                <el-timeline>
-                  <el-timeline-item
-                    v-for="(activity, index) in activities"
-                    :key="index"
-                    :icon="activity.icon"
-                    :type="activity.type"
-                    :color="activity.color"
-                    :size="activity.size"
-                    :timestamp="activity.timestamp">
-                    {{activity.content}}
-                  </el-timeline-item>
-                </el-timeline>
-              </div>
-            </el-main>
-              </el-form-item>
-            </el-col >
-            </el-container>
-        </el-row>
-
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button  type="primary" @click="cancelDialog()">取消</el-button>
-      </div>
-    </el-dialog>
-    <el-dialog :close-on-click-modal="false"  :visible.sync="jianlidanweishenheDialog" title="监理单位审核报检单" width="1000px" >
-      <el-form ref="defaultForms"  :model="defaultForms" :rules="rules"   size="small" label-width="80px">
-        <el-row>
-          <div>
-            <el-divider>隧道基本信息</el-divider>
-          </div>
-        </el-row>
-        <el-row >
-          <el-col :span="7">
-            <el-form-item >
-              <div class="sub-title">项目名称</div>
-              <el-input v-model="defaultForms.projectName" style="width: 250px;"  disabled ></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="7">
-            <el-form-item >
-              <div class="sub-title">标段名称</div>
-              <el-input v-model="defaultForms.sectionName" style="width: 250px;" disabled />
-            </el-form-item>
-          </el-col>
-          <el-col :span="7">
-            <el-form-item >
-              <div class="sub-title">隧道名称</div>
-              <el-input v-model="defaultForms.tunnelName" style="width: 250px;"  disabled />
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row >
-          <el-col :span="7">
-            <el-form-item >
-              <div class="sub-title">工点名称</div>
-              <el-input v-model="defaultForms.worksiteName" style="width: 250px;" disabled />
-            </el-form-item>
-          </el-col>
-          <el-col :span="7">
-            <el-form-item >
-              <div class="sub-title">待检区段起始里程</div>
-              <el-input v-model="defaultForms.beizhu2" style="width: 250px;" disabled />
-            </el-form-item>
-          </el-col>
-          <el-col :span="7">
-            <el-form-item >
-              <div class="sub-title">待检区段结束里程</div>
-              <el-input v-model="defaultForms.beizhu3" style="width: 250px;" disabled />
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="7">
-            <el-form-item >
-              <div class="sub-title">待检区段长度</div>
-              <el-input v-model="defaultForms.beizhu4" style="width: 250px;" disabled />
-            </el-form-item>
-          </el-col>
-          <el-col :span="5">
-            <el-form-item >
-              <div class="sub-title" >施工单位</div>
-              <el-input v-model="defaultForms.beizhu5" style="width: 180px;"  disabled   >{{ user.nickName }}</el-input>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row>
-          <div>
-            <el-divider>衬砌报检基本信息</el-divider>
-          </div>
-        </el-row>
-        <el-row >
-          <el-col :span="7">
-            <el-form-item label="">
-              <div class="sub-title">申请检测时间</div>
-              <el-date-picker
-                v-model="defaultForms.testTime"
-                type="datetime"
-                placeholder="选择日期时间"
-                disabled>
-              </el-date-picker>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="7">
-            <el-form-item label="">
-              <div class="sub-title">起始里程</div>
-              <el-input  style="width: 60px;" disabled value="DK" /> <el-input v-model="defaultForms.beizhu16" style="width: 60px;" disabled/><span> + </span><el-input v-model="defaultForms.beizhu14" style="width: 60px;" disabled/>
-            </el-form-item>
-          </el-col>
-          <el-col :span="7">
-            <el-form-item label="">
-              <div class="sub-title">结束里程</div>
-              <el-input  style="width: 60px;" disabled value="DK" /> <el-input v-model="defaultForms.beizhu17" style="width: 60px;" disabled/><span> + </span><el-input v-model="defaultForms.beizhu15" style="width: 60px;" disabled />
-            </el-form-item>
-          </el-col>
-          <el-col :span="5">
-            <el-form-item label="">
-              <div class="sub-title">检测长度</div>
-              <el-input v-model="defaultForms.testLength" style="width: 120px;" disabled/>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row >
-          <el-col :span="5">
-            <el-form-item label="">
-              <div class="sub-title">二次衬砌厚度(cm):拱部</div>
-              <el-input v-model="defaultForms.secLineArchTickness" style="width: 150px;" disabled/>
-            </el-form-item>
-          </el-col>
-          <el-col :span="5">
-            <el-form-item label="">
-              <div class="sub-title">二次衬砌厚度(cm):边墙</div>
-              <el-input v-model="defaultForms.secLineWallTickness" style="width: 150px;" disabled/>
-            </el-form-item>
-          </el-col>
-          <el-col :span="5">
-            <el-form-item label="">
-              <div class="sub-title">二次衬砌厚度(cm):仰拱</div>
-              <el-input v-model="defaultForms.secLineInverArchTickness" style="width: 150px;" disabled/>
-            </el-form-item>
-          </el-col>
-          <el-col :span="5">
-            <el-form-item label="">
-              <div class="sub-title">二次衬砌厚度(cm):填充</div>
-              <el-input v-model="defaultForms.secLineFilerTickness" style="width: 150px;" disabled/>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row >
-          <el-col :span="5">
-            <el-form-item >
-              <div class="sub-title">围岩类型</div>
-              <el-input v-model="defaultForms.wallRockType" style="width: 150px;" disabled/>
-            </el-form-item>
-          </el-col>
-          <el-col :span="5">
-            <el-form-item label="">
-              <div class="sub-title">初支厚度(cm)</div>
-              <el-input v-model="defaultForms.supportTickness" style="width: 150px;" disabled/>
-            </el-form-item>
-          </el-col>
-          <el-col :span="5">
-            <el-form-item label="">
-              <div class="sub-title">间距(m/榀)</div>
-              <el-input v-model="defaultForms.separationDistance" style="width: 150px;" disabled/>
-            </el-form-item>
-          </el-col>
-          <el-col :span="5">
-            <el-form-item label="">
-              <div class="sub-title">钢筋网间距(cm)</div>
-              <el-input v-model="defaultForms.meshDistance" style="width: 150px;" disabled/>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row >
-          <el-col :span="5">
-            <el-form-item label="">
-              <div class="sub-title">环向钢筋间距(cm)</div>
-              <el-input v-model="defaultForms.annularBarDistance" style="width: 150px;" disabled/>
-            </el-form-item>
-          </el-col>
-          <el-col :span="5">
-            <el-form-item label="">
-              <div class="sub-title">钢筋保护厚度(mm)</div>
-              <el-input v-model="defaultForms.reinforPrtTickness" style="width: 150px;" disabled/>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row>
-          <div>
-            <el-divider>确认检测计划</el-divider>
-          </div>
-        </el-row>
-        <el-row >
-          <el-container>
-            <el-col :span="10" >
-              <el-form-item>
-                <el-aside width="200px"  align="center">审核流程</el-aside>
-              </el-form-item>
-            </el-col>
-            <el-col >
+            <el-col>
               <el-form-item>
                 <el-main>
                   <div class="block">
@@ -1308,177 +1097,383 @@
                         :type="activity.type"
                         :color="activity.color"
                         :size="activity.size"
-                        :timestamp="activity.timestamp">
-                        {{activity.content}}
+                        :timestamp="activity.timestamp"
+                      >
+                        {{ activity.content }}
                       </el-timeline-item>
                     </el-timeline>
                   </div>
                 </el-main>
               </el-form-item>
-            </el-col >
+            </el-col>
           </el-container>
         </el-row>
-        <el-row >
+
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="cancelDialog()">取消</el-button>
+      </div>
+    </el-dialog>
+    <el-dialog :close-on-click-modal="false" :visible.sync="jianlidanweishenheDialog" title="监理单位审核报检单" width="1000px">
+      <el-form ref="defaultForms" :model="defaultForms" :rules="rules" size="small" label-width="80px">
+        <el-row>
+          <div>
+            <el-divider>隧道基本信息</el-divider>
+          </div>
+        </el-row>
+        <el-row>
+          <el-col :span="7">
+            <el-form-item>
+              <div class="sub-title">项目名称</div>
+              <el-input v-model="defaultForms.projectName" style="width: 250px;" disabled />
+            </el-form-item>
+          </el-col>
+          <el-col :span="7">
+            <el-form-item>
+              <div class="sub-title">标段名称</div>
+              <el-input v-model="defaultForms.sectionName" style="width: 250px;" disabled />
+            </el-form-item>
+          </el-col>
+          <el-col :span="7">
+            <el-form-item>
+              <div class="sub-title">隧道名称</div>
+              <el-input v-model="defaultForms.tunnelName" style="width: 250px;" disabled />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="7">
+            <el-form-item>
+              <div class="sub-title">工点名称</div>
+              <el-input v-model="defaultForms.worksiteName" style="width: 250px;" disabled />
+            </el-form-item>
+          </el-col>
+          <el-col :span="7">
+            <el-form-item>
+              <div class="sub-title">待检区段起始里程</div>
+              <el-input v-model="defaultForms.beizhu2" style="width: 250px;" disabled />
+            </el-form-item>
+          </el-col>
+          <el-col :span="7">
+            <el-form-item>
+              <div class="sub-title">待检区段结束里程</div>
+              <el-input v-model="defaultForms.beizhu3" style="width: 250px;" disabled />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="7">
+            <el-form-item>
+              <div class="sub-title">待检区段长度</div>
+              <el-input v-model="defaultForms.beizhu4" style="width: 250px;" disabled />
+            </el-form-item>
+          </el-col>
+          <el-col :span="5">
+            <el-form-item>
+              <div class="sub-title">施工单位</div>
+              <el-input v-model="defaultForms.beizhu5" style="width: 180px;" disabled>{{ user.nickName }}</el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <div>
+            <el-divider>衬砌报检基本信息</el-divider>
+          </div>
+        </el-row>
+        <el-row>
+          <el-col :span="7">
+            <el-form-item label="">
+              <div class="sub-title">申请检测时间</div>
+              <el-date-picker
+                v-model="defaultForms.testTime"
+                type="datetime"
+                placeholder="选择日期时间"
+                disabled
+              />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="7">
+            <el-form-item label="">
+              <div class="sub-title">起始里程</div>
+              <el-input style="width: 60px;" disabled value="DK" /> <el-input v-model="defaultForms.beizhu16" style="width: 60px;" disabled /><span> + </span><el-input v-model="defaultForms.beizhu14" style="width: 60px;" disabled />
+            </el-form-item>
+          </el-col>
+          <el-col :span="7">
+            <el-form-item label="">
+              <div class="sub-title">结束里程</div>
+              <el-input style="width: 60px;" disabled value="DK" /> <el-input v-model="defaultForms.beizhu17" style="width: 60px;" disabled /><span> + </span><el-input v-model="defaultForms.beizhu15" style="width: 60px;" disabled />
+            </el-form-item>
+          </el-col>
+          <el-col :span="5">
+            <el-form-item label="">
+              <div class="sub-title">检测长度</div>
+              <el-input v-model="defaultForms.testLength" style="width: 120px;" disabled />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="5">
+            <el-form-item label="">
+              <div class="sub-title">二次衬砌厚度(cm):拱部</div>
+              <el-input v-model="defaultForms.secLineArchTickness" style="width: 150px;" disabled />
+            </el-form-item>
+          </el-col>
+          <el-col :span="5">
+            <el-form-item label="">
+              <div class="sub-title">二次衬砌厚度(cm):边墙</div>
+              <el-input v-model="defaultForms.secLineWallTickness" style="width: 150px;" disabled />
+            </el-form-item>
+          </el-col>
+          <el-col :span="5">
+            <el-form-item label="">
+              <div class="sub-title">二次衬砌厚度(cm):仰拱</div>
+              <el-input v-model="defaultForms.secLineInverArchTickness" style="width: 150px;" disabled />
+            </el-form-item>
+          </el-col>
+          <el-col :span="5">
+            <el-form-item label="">
+              <div class="sub-title">二次衬砌厚度(cm):填充</div>
+              <el-input v-model="defaultForms.secLineFilerTickness" style="width: 150px;" disabled />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="5">
+            <el-form-item>
+              <div class="sub-title">围岩类型</div>
+              <el-input v-model="defaultForms.wallRockType" style="width: 150px;" disabled />
+            </el-form-item>
+          </el-col>
+          <el-col :span="5">
+            <el-form-item label="">
+              <div class="sub-title">初支厚度(cm)</div>
+              <el-input v-model="defaultForms.supportTickness" style="width: 150px;" disabled />
+            </el-form-item>
+          </el-col>
+          <el-col :span="5">
+            <el-form-item label="">
+              <div class="sub-title">间距(m/榀)</div>
+              <el-input v-model="defaultForms.separationDistance" style="width: 150px;" disabled />
+            </el-form-item>
+          </el-col>
+          <el-col :span="5">
+            <el-form-item label="">
+              <div class="sub-title">钢筋网间距(cm)</div>
+              <el-input v-model="defaultForms.meshDistance" style="width: 150px;" disabled />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="5">
+            <el-form-item label="">
+              <div class="sub-title">环向钢筋间距(cm)</div>
+              <el-input v-model="defaultForms.annularBarDistance" style="width: 150px;" disabled />
+            </el-form-item>
+          </el-col>
+          <el-col :span="5">
+            <el-form-item label="">
+              <div class="sub-title">钢筋保护厚度(mm)</div>
+              <el-input v-model="defaultForms.reinforPrtTickness" style="width: 150px;" disabled />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <div>
+            <el-divider>确认检测计划</el-divider>
+          </div>
+        </el-row>
+        <el-row>
           <el-container>
-            <el-col :span="10" >
+            <el-col :span="10">
               <el-form-item>
-                <el-aside width="200px"  align="center">审核意见</el-aside>
+                <el-aside width="200px" align="center">审核流程</el-aside>
               </el-form-item>
             </el-col>
-            <el-col >
+            <el-col>
+              <el-form-item>
+                <el-main>
+                  <div class="block">
+                    <el-timeline>
+                      <el-timeline-item
+                        v-for="(activity, index) in activities"
+                        :key="index"
+                        :icon="activity.icon"
+                        :type="activity.type"
+                        :color="activity.color"
+                        :size="activity.size"
+                        :timestamp="activity.timestamp"
+                      >
+                        {{ activity.content }}
+                      </el-timeline-item>
+                    </el-timeline>
+                  </div>
+                </el-main>
+              </el-form-item>
+            </el-col>
+          </el-container>
+        </el-row>
+        <el-row>
+          <el-container>
+            <el-col :span="10">
+              <el-form-item>
+                <el-aside width="200px" align="center">审核意见</el-aside>
+              </el-form-item>
+            </el-col>
+            <el-col>
               <el-form-item>
                 <div>
                   <el-radio v-model="defaultForms.beizhu19" label="1" border>同意</el-radio>
                   <el-radio v-model="defaultForms.beizhu19" label="0" border>不同意</el-radio>
                 </div>
               </el-form-item>
-            </el-col >
+            </el-col>
           </el-container>
         </el-row>
-        <el-row >
+        <el-row>
           <el-container>
-            <el-col :span="6" >
+            <el-col :span="6">
               <el-form-item>
-                <el-aside width="200px"  align="center">备注信息</el-aside>
+                <el-aside width="200px" align="center">备注信息</el-aside>
               </el-form-item>
             </el-col>
             <el-col :span="15">
               <el-form-item>
                 <el-input
+                  v-model="defaultForms.beizhu20"
                   type="textarea"
                   :rows="4"
                   placeholder="请输入内容"
-                  v-model="defaultForms.beizhu20">
-                </el-input>
+                />
               </el-form-item>
-            </el-col >
+            </el-col>
           </el-container>
         </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="text" @click=" cancelDialog()">取消</el-button>
-        <el-button :loading="crud.status.cu === 2" type="primary" @click="submitDeForm(defaultForms)"  v-permission="['admin','testInformation:jiliupdateTestInformation']">提交报检单</el-button>
+        <el-button v-permission="['admin','testInformation:jiliupdateTestInformation']" :loading="crud.status.cu === 2" type="primary" @click="submitDeForm(defaultForms)">提交报检单</el-button>
       </div>
     </el-dialog>
-    <el-dialog :close-on-click-modal="false"  :visible.sync="TestShenHeDialog" title="检测单位确认报检单信息" width="1000px"  style="color: #FFBA00">
-      <el-form ref="defaultForms"  :model="defaultForms" :rules="rules"   size="small" label-width="80px">
+    <el-dialog :close-on-click-modal="false" :visible.sync="TestShenHeDialog" title="检测单位确认报检单信息" width="1000px" style="color: #FFBA00">
+      <el-form ref="defaultForms" :model="defaultForms" :rules="rules" size="small" label-width="80px">
         <el-row>
           <div>
             <el-divider>隧道基本信息</el-divider>
           </div>
         </el-row>
-        <el-row >
+        <el-row>
           <el-col :span="7">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">项目名称</div>
-              <el-input v-model="defaultForms.projectName" style="width: 250px;" disabled></el-input>
+              <el-input v-model="defaultForms.projectName" style="width: 250px;" disabled />
             </el-form-item>
           </el-col>
           <el-col :span="7">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">标段名称</div>
-              <el-input v-model="defaultForms.sectionName" style="width: 250px;" disabled/>
+              <el-input v-model="defaultForms.sectionName" style="width: 250px;" disabled />
             </el-form-item>
           </el-col>
           <el-col :span="7">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">隧道名称</div>
-              <el-input v-model="defaultForms.tunnelName" style="width: 250px;" disabled/>
+              <el-input v-model="defaultForms.tunnelName" style="width: 250px;" disabled />
             </el-form-item>
           </el-col>
         </el-row>
-        <el-row >
+        <el-row>
           <el-col :span="7">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">工点名称</div>
-              <el-input v-model="defaultForms.worksiteName" style="width: 250px;" disabled/>
+              <el-input v-model="defaultForms.worksiteName" style="width: 250px;" disabled />
             </el-form-item>
           </el-col>
           <el-col :span="7">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">待检区段起始里程</div>
-              <el-input v-model="defaultForms.beizhu2" style="width: 250px;" disabled/>
+              <el-input v-model="defaultForms.beizhu2" style="width: 250px;" disabled />
             </el-form-item>
           </el-col>
           <el-col :span="7">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">待检区段结束里程</div>
-              <el-input v-model="defaultForms.beizhu3" style="width: 250px;" disabled/>
+              <el-input v-model="defaultForms.beizhu3" style="width: 250px;" disabled />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="5">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">待检区段长度</div>
-              <el-input v-model="defaultForms.beizhu4" style="width: 150px;" disabled/>
+              <el-input v-model="defaultForms.beizhu4" style="width: 150px;" disabled />
             </el-form-item>
           </el-col>
           <el-col :span="5">
-            <el-form-item >
-              <div class="sub-title" >施工单位</div>
+            <el-form-item>
+              <div class="sub-title">施工单位</div>
               <el-input v-model="defaultForms.beizhu5" style="width: 180px;" disabled>{{ user.nickName }}</el-input>
             </el-form-item>
           </el-col>
           <el-col :span="5">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">联系人</div>
               <el-input v-model="defaultForms.beizhu6" style="width: 180px;" disabled>{{ user.username }}</el-input>
             </el-form-item>
           </el-col>
           <el-col :span="5">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">联系方式</div>
-              <el-input v-model="defaultForms.beizhu7" style="width: 180px;" disabled/>
+              <el-input v-model="defaultForms.beizhu7" style="width: 180px;" disabled />
             </el-form-item>
           </el-col>
         </el-row>
-        <el-row >
+        <el-row>
           <el-col :span="5">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">监理单位</div>
               <!-- <el-input v-model="defaultForms.beizhu9" style="width: 180px;" /> -->
               <el-select
                 v-model="defaultForms.beizhu9"
                 placeholder="选择监理单位"
                 clearable
-                @focus="handleQuery1"
                 style="width: 170px;"
                 disabled
+                @focus="handleQuery1"
               >
                 <el-option
                   v-for="item in dishesInfoList1"
                   :key="item.nickName"
                   :value="item.nickName"
                   :label="item.nickName"
-                >
-                </el-option>
+                />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="5">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">检测方式</div>
               <el-select v-model="defaultForms.beizhu10" clearable placeholder="请选择" style="width: 150px;" disabled>
                 <el-option
                   v-for="item in options"
                   :key="item.value"
                   :label="item.label"
-                  :value="item.value">
-                </el-option>
+                  :value="item.value"
+                />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="5">
-            <el-form-item >
+            <el-form-item>
               <div class="sub-title">检测方法</div>
               <el-select v-model="defaultForms.beizhu11" clearable placeholder="请选择" style="width: 150px;" disabled>
                 <el-option
                   v-for="item in options1"
                   :key="item.value"
                   :label="item.label"
-                  :value="item.value">
-                </el-option>
+                  :value="item.value"
+                />
               </el-select>
             </el-form-item>
           </el-col>
@@ -1490,8 +1485,7 @@
                 type="datetime"
                 placeholder="选择日期时间"
                 disabled
-              >
-              </el-date-picker>
+              />
             </el-form-item>
           </el-col>
         </el-row>
@@ -1504,77 +1498,74 @@
           <el-col :span="4">
             <el-form-item label="">
               <div class="sub-title">检测部位</div>
-              <el-input v-model="defaultForms.beizhu12" style="width: 150px;" disabled/>
+              <el-input v-model="defaultForms.beizhu12" style="width: 150px;" disabled />
             </el-form-item>
           </el-col>
-         <el-col :span="6">
-           <el-form-item label="">
-             <div class="sub-title">隧道浇筑时间</div>
-             <el-date-picker
-               style="width: 200px;"
-               v-model="defaultForms.beizhu12"
-               type="datetime"
-               placeholder="选择日期时间"
-               disabled
-             >
-             </el-date-picker>
-           </el-form-item>
-         </el-col>
+          <el-col :span="6">
+            <el-form-item label="">
+              <div class="sub-title">隧道浇筑时间</div>
+              <el-date-picker
+                v-model="defaultForms.beizhu12"
+                style="width: 200px;"
+                type="datetime"
+                placeholder="选择日期时间"
+                disabled
+              />
+            </el-form-item>
+          </el-col>
           <el-col :span="7">
             <el-form-item label="">
               <div class="sub-title">起始里程</div>
-              <el-input  style="width: 60px;" disabled value="DK" /> <el-input v-model="defaultForms.beizhu16" style="width: 60px;" disabled/><span> + </span><el-input v-model="defaultForms.beizhu14" style="width: 60px;" disabled/>
+              <el-input style="width: 60px;" disabled value="DK" /> <el-input v-model="defaultForms.beizhu16" style="width: 60px;" disabled /><span> + </span><el-input v-model="defaultForms.beizhu14" style="width: 60px;" disabled />
             </el-form-item>
           </el-col>
           <el-col :span="7">
             <el-form-item label="">
               <div class="sub-title">结束里程</div>
-              <el-input  style="width: 60px;" disabled value="DK" /> <el-input v-model="defaultForms.beizhu17" style="width: 60px;" disabled/><span> + </span><el-input v-model="defaultForms.beizhu15" style="width: 60px;" disabled/>
+              <el-input style="width: 60px;" disabled value="DK" /> <el-input v-model="defaultForms.beizhu17" style="width: 60px;" disabled /><span> + </span><el-input v-model="defaultForms.beizhu15" style="width: 60px;" disabled />
             </el-form-item>
           </el-col>
           <el-col :span="5">
             <el-form-item label="">
               <div class="sub-title">检测长度</div>
-              <el-input v-model="defaultForms.testLength" style="width: 120px;" disabled/>
+              <el-input v-model="defaultForms.testLength" style="width: 120px;" disabled />
             </el-form-item>
           </el-col>
           <el-col :span="5">
-            <el-form-item  >
+            <el-form-item>
               <div class="sub-title">检测设备：天线</div>
               <el-select
                 v-model="defaultForms.beizhu24"
                 placeholder="选择天线"
                 clearable
-                @focus="handleQueryTianxian"
                 style="width: 170px;"
+                @focus="handleQueryTianxian"
               >
                 <el-option
                   v-for="item in dishesInfoList2"
                   :key="item.deviceModel"
                   :value="item.deviceId"
                   :label="item.deviceModel"
-                >
-                </el-option>
+                />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="5">
-            <el-form-item  >
+            <el-form-item>
               <div class="sub-title">检测设备：主机</div>
               <el-select
                 v-model="defaultForms.beizhu25"
                 placeholder="选择主机"
                 clearable
-                @focus="handleQueryZhuji"
                 style="width: 170px;"
+                @focus="handleQueryZhuji"
               >
                 <el-option
                   v-for="item in dishesInfoList3"
                   :key="item.deviceModel"
                   :value="item.deviceId"
                   :label="item.deviceModel"
-                >
-                </el-option>
+                />
               </el-select>
             </el-form-item>
           </el-col>
@@ -1584,53 +1575,53 @@
             <el-divider>确认检测计划</el-divider>
           </div>
         </el-row>
-        <el-row >
+        <el-row>
           <el-container>
-            <el-col :span="10" >
+            <el-col :span="10">
               <el-form-item>
-                <el-aside width="200px"  align="center">确认意见</el-aside>
+                <el-aside width="200px" align="center">确认意见</el-aside>
               </el-form-item>
             </el-col>
-            <el-col >
+            <el-col>
               <el-form-item>
-               <el-row>
-                 施工单位负责人意见： 无
-               </el-row>
+                <el-row>
+                  施工单位负责人意见： 无
+                </el-row>
               </el-form-item>
               <el-form-item>
-              <el-row>
-                监理工程师意见： 无
-              </el-row>
+                <el-row>
+                  监理工程师意见： 无
+                </el-row>
               </el-form-item>
               <el-form-item>
-              <el-row>
-                现场检测人员意见： 无
-              </el-row>
+                <el-row>
+                  现场检测人员意见： 无
+                </el-row>
               </el-form-item>
-            </el-col >
+            </el-col>
           </el-container>
         </el-row>
-        <el-row >
+        <el-row>
           <el-container>
-            <el-col :span="10" >
+            <el-col :span="10">
               <el-form-item>
-                <el-aside width="200px"  align="center">确认检测时间</el-aside>
+                <el-aside width="200px" align="center">确认检测时间</el-aside>
               </el-form-item>
             </el-col>
-            <el-col >
+            <el-col>
               <el-form-item>
                 <div>
                   <el-radio v-model="defaultForms.beizhu22" label="1" border>同意</el-radio>
                   <el-radio v-model="defaultForms.beizhu22" label="0" border>不同意</el-radio>
                 </div>
               </el-form-item>
-            </el-col >
+            </el-col>
           </el-container>
         </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="text" @click=" cancelDialog()">取消</el-button>
-        <el-button :loading="crud.status.cu === 2" type="primary" @click="submitDesForm(defaultForms)" v-permission="['admin','testInformation:jianceupdateTestInformation']">提交报检单</el-button>
+        <el-button v-permission="['admin','testInformation:jianceupdateTestInformation']" :loading="crud.status.cu === 2" type="primary" @click="submitDesForm(defaultForms)">提交报检单</el-button>
       </div>
     </el-dialog>
     <tunnel ref="openTunnel" />
@@ -2002,7 +1993,6 @@ export default {
     JianceCheck(data) {
       this.defaultForms = data
       if (data.statute === '检测单位待审批') {
-
         this.TestShenHeDialog = true
       } else if (data.statute === '报检单已审批') {
         this.$confirm('报检单已审批')
@@ -2065,7 +2055,7 @@ export default {
       this.jianlidanweishenheDialog = false
       this.TestShenHeDialog = false
     },
-    updateDetectionSummaryDialog(data){
+    updateDetectionSummaryDialog(data) {
       this.dataid = data.testInforId
       this.uploadDetectionSummaryDialogIs = true
     },
@@ -2102,15 +2092,15 @@ export default {
         duration: 2500
       })
     },
-    cancel(){
+    cancel() {
       this.uploadPhotoDialog = false
     },
-    downloadDetectionSummary(data,name) {
+    downloadDetectionSummary(data, name) {
       // 打包下载
       generator(data, -2).then(data => {
         downloadFileRaw(data, name)
       })
-    },
+    }
   }
 }
 </script>

@@ -1,4 +1,4 @@
-<!--  隧道衬砌信息管理 -> 数据信息管理 -->
+<!--  隧道衬砌信息管理 -> 数据信息管理（user账户） -->
 <template>
   <div class="app-container">
     <!--工具栏-->
@@ -23,19 +23,6 @@
         <el-input v-model="query.beizhu1" clearable placeholder="测线编号" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
         <label class="el-form-item-label">检测数据id</label>
         <el-input v-model="query.id" clearable placeholder="检测数据id" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <!--        下拉框，但不能多选，还是放弃-->
-        <!--        <el-select v-model="query.vategory" placeholder="请选择搜索项" style="width: 185px;" class="filter-item">-->
-        <!--          <el-option label="报验单编号" value="bydbh"></el-option>-->
-        <!--          <el-option label="用户账号" value="account"></el-option>-->
-        <!--          <el-option label="试验类型" value="testType"></el-option>-->
-        <!--          <el-option label="实际检测开始里程" value="sjstartMile"></el-option>-->
-        <!--          <el-option label="实际检测结束里程" value="sjstopMile"></el-option>-->
-        <!--          <el-option label="厚度数据" value="appFileTypeRadar"></el-option>-->
-        <!--          <el-option label="现场照片" value="appFileTypePhoto"></el-option>-->
-        <!--          <el-option label="测线编号" value="beizhu1"></el-option>-->
-        <!--          <el-option label="检测数据id" value="id"></el-option>-->
-        <!--        </el-select>-->
-        <!--        <el-input v-model="query.searchTerm" clearable placeholder="请输入搜索内容" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery"></el-input>-->
         <rrOperation :crud="crud" />
       </div>
       <!--如果想在工具栏加入更多按钮，可以使用插槽方式， slot = 'left' or 'right'-->

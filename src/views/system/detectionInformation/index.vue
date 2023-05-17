@@ -1,4 +1,5 @@
 <template>
+  <!--  检测数据管理-->
   <div class="app-container">
     <!--工具栏-->
     <div class="head-container">

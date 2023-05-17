@@ -9,7 +9,7 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            隧道总数量（座）
+            隧道信息（座）
           </div>
           <count-to :start-val="0" :end-val="th1" :duration="2000" class="card-panel-num" />
         </div>
@@ -28,19 +28,19 @@
         </div>
       </div>
     </el-col>
-    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-      <div class="card-panel" @click="handleSetLineChartData('newVisitis')">
-        <div class="card-panel-icon-wrapper icon-people">
-          <svg-icon icon-class="work" class-name="card-panel-icon" />
-        </div>
-        <div class="card-panel-description">
-          <div class="card-panel-text">
-            已施工进度（米）
-          </div>
-          <count-to :start-val="0" :end-val="th3" :duration="2600" class="card-panel-num" />
-        </div>
-      </div>
-    </el-col>
+    <!--    <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">-->
+    <!--      <div class="card-panel" @click="handleSetLineChartData('newVisitis')">-->
+    <!--        <div class="card-panel-icon-wrapper icon-people">-->
+    <!--          <svg-icon icon-class="work" class-name="card-panel-icon" />-->
+    <!--        </div>-->
+    <!--        <div class="card-panel-description">-->
+    <!--          <div class="card-panel-text">-->
+    <!--            已施工进度（米）-->
+    <!--          </div>-->
+    <!--          <count-to :start-val="0" :end-val="th3" :duration="2600" class="card-panel-num" />-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </el-col>-->
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" @click="handleSetLineChartData('messages')">
         <div class="card-panel-icon-wrapper icon-message">
@@ -87,7 +87,7 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            未处置缺陷（个）
+            缺陷数量（个）
           </div>
           <count-to :start-val="0" :end-val="th7" :duration="3200" class="card-panel-num" />
         </div>
@@ -100,7 +100,7 @@
         </div>
         <div class="card-panel-description">
           <div class="card-panel-text">
-            检测率
+            检测进度
           </div>
           <count-to :start-val="0" :end-val="th8" :duration="3600" class="card-panel-num" />%
         </div>

@@ -1,4 +1,5 @@
 <template>
+  <!--  隧道衬砌信息管理 - 隧道信息管理 -->
   <div class="app-container">
     <!--工具栏-->
     <div class="head-container">
@@ -35,7 +36,7 @@
        -->
         <label class="el-form-item-label">隧道名称</label>
         <el-input v-model="query.tunnelName" clearable placeholder="隧道名称" style="width: 185px;" class="filter-item" @keyup.enter.native="crud.toQuery" />
-        <rrOperation :crud="crud"  />
+        <rrOperation :crud="crud" />
 
       </div>
       <!--如果想在工具栏加入更多按钮，可以使用插槽方式， slot = 'left' or 'right'-->
@@ -64,19 +65,19 @@
             <el-input v-model="form.worksiteName" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="隧道起始里程">
-            <el-input  style="width: 60px;" disabled value="DK" /> <el-input v-model="form.beizhu1" style="width: 140px;" /><span> + </span><el-input v-model="form.beizhu5" style="width: 140px;" />
+            <el-input style="width: 60px;" disabled value="DK" /> <el-input v-model="form.beizhu1" style="width: 140px;" /><span> + </span><el-input v-model="form.beizhu5" style="width: 140px;" />
           </el-form-item>
           <el-form-item label="隧道结束里程">
-            <el-input  style="width: 60px;" disabled value="DK" /> <el-input v-model="form.beizhu2" style="width: 140px;" /><span> + </span><el-input v-model="form.beizhu6" style="width: 140px;" />
+            <el-input style="width: 60px;" disabled value="DK" /> <el-input v-model="form.beizhu2" style="width: 140px;" /><span> + </span><el-input v-model="form.beizhu6" style="width: 140px;" />
           </el-form-item>
           <el-form-item label="隧道长度">
             <el-input v-model="form.tunnelLength" style="width: 370px;" />
           </el-form-item>
           <el-form-item label="上传附件材料" enctype="multipart/form-data">
             <el-upload
+              ref="upload"
               multiple
               class="upload-demo"
-              ref="upload"
               :action="fileUploadApi + '?name=' + form.name"
               :on-preview="handlePreview"
               :on-remove="handleRemove"
@@ -87,12 +88,12 @@
               :headers="headers"
               :on-success="handleSuccess"
               :on-error="handleError"
-              >
+            >
               <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-              <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload"  v-permission="['admin','storage:add']">上传文件</el-button>
+              <el-button v-permission="['admin','storage:add']" style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传文件</el-button>
               <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
             </el-upload>
-            <el-input  ref="inp"  v-model="form.beizhu3" style="width: 120px;" @input="changeVersion" type="hidden"></el-input>
+            <el-input ref="inp" v-model="form.beizhu3" style="width: 120px;" type="hidden" @input="changeVersion" />
           </el-form-item>
 
           <!--
@@ -168,8 +169,8 @@
           -->
         </el-form>
         <div slot="footer" class="dialog-footer">
-          <el-button type="text"  :before-upload="beforesubmit"  @click="crud.cancelCU">取消</el-button>
-          <el-button :loading="crud.status.cu === 2"  :before-upload="beforesubmit" type="primary" @click="crud.submitCU">确认</el-button>
+          <el-button type="text" :before-upload="beforesubmit" @click="crud.cancelCU">取消</el-button>
+          <el-button :loading="crud.status.cu === 2" :before-upload="beforesubmit" type="primary" @click="crud.submitCU">确认</el-button>
         </div>
       </el-dialog>
       <!--表格渲染-->
@@ -184,7 +185,7 @@
         <el-table-column prop="tunnelStartingDistance" label="隧道起始里程" />
         <el-table-column prop="tunnelEndingDistance" label="隧道结束里程" />
         <el-table-column prop="tunnelLength" label="隧道长度" />
-        <el-table-column  label="附件材料" width="150px" align="center">
+        <el-table-column label="附件材料" width="150px" align="center">
           <template slot-scope="scopes">
             <el-button
               class="filter-item"
@@ -223,8 +224,8 @@
         -->
         <el-table-column label="状态" width="170px" align="center" prop="beizhu4">
           <template slot-scope="scope">
-            <el-button     v-permission="['admin','tunnelInformation:updateStatus']" style="margin-left: 3px" type="text"  @click="updateStatus(scope.row,scope.row.beizhu4)">
-                {{ scope.row.beizhu4}}
+            <el-button v-permission="['admin','tunnelInformation:updateStatus']" style="margin-left: 3px" type="text" @click="updateStatus(scope.row,scope.row.beizhu4)">
+              {{ scope.row.beizhu4 }}
             </el-button>
           </template>
         </el-table-column>
@@ -250,45 +251,45 @@
         </el-table-column>
       </el-table>
       <el-dialog title="附件材料" :visible.sync="TunnelDialog">
-      <el-table ref="table" v-loading="crud.loading" :data=DataList style="width: 100%;" @selection-change="crud.selectionChangeHandler">
-      <el-table-column prop="name" label="文件名">
-      <template slot-scope="scope">
-      <el-popover
-        :content="'点击下载文件'"
-        placement="top-start"
-        title=""
-        width="200"
-        trigger="hover"
-      >
-      <a
-        slot="reference"
-        :href="baseApi + '/file/' + scope.row.type + '/' + scope.row.realName"
-        class="el-link--primary"
-        style="word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color: #1890ff;font-size: 13px;"
-        target="_blank"
-      >
-          {{ scope.row.realName}}
-        </a>
-      </el-popover>
-      </template>
-      </el-table-column>
-        <el-table-column prop="path" label="预览图">
-          <template slot-scope="{row}">
-            <el-image
-              :src=" baseApi + '/file/' + row.type + '/' + row.realName"
-              :preview-src-list="[baseApi + '/file/' + row.type + '/' + row.realName]"
-              fit="contain"
-              lazy
-              class="el-avatar"
-            >
-              <div slot="error">
-                <i class="el-icon-document" />
-              </div>
-            </el-image>
-          </template>
-        </el-table-column>
-        <el-table-column prop="type" label="类别" />
-        <el-table-column prop="createTime" label="上传日期" />
+        <el-table ref="table" v-loading="crud.loading" :data="DataList" style="width: 100%;" @selection-change="crud.selectionChangeHandler">
+          <el-table-column prop="name" label="文件名">
+            <template slot-scope="scope">
+              <el-popover
+                :content="'点击下载文件'"
+                placement="top-start"
+                title=""
+                width="200"
+                trigger="hover"
+              >
+                <a
+                  slot="reference"
+                  :href="baseApi + '/file/' + scope.row.type + '/' + scope.row.realName"
+                  class="el-link--primary"
+                  style="word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color: #1890ff;font-size: 13px;"
+                  target="_blank"
+                >
+                  {{ scope.row.realName }}
+                </a>
+              </el-popover>
+            </template>
+          </el-table-column>
+          <el-table-column prop="path" label="预览图">
+            <template slot-scope="{row}">
+              <el-image
+                :src=" baseApi + '/file/' + row.type + '/' + row.realName"
+                :preview-src-list="[baseApi + '/file/' + row.type + '/' + row.realName]"
+                fit="contain"
+                lazy
+                class="el-avatar"
+              >
+                <div slot="error">
+                  <i class="el-icon-document" />
+                </div>
+              </el-image>
+            </template>
+          </el-table-column>
+          <el-table-column prop="type" label="类别" />
+          <el-table-column prop="createTime" label="上传日期" />
         <!--
              <el-table-column  label="操作" >
             <template slot-scope="scope">
@@ -302,7 +303,7 @@
             </template>
         </el-table-column>
         -->
-      </el-table>
+        </el-table>
       </el-dialog>
 
       <!--分页组件-->

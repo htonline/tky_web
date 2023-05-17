@@ -25,7 +25,7 @@ export default {
   },
   data() {
     return {
-      title: '隧道衬砌质量检测信息化系统',
+      title: '城市道路病害数据管理系统',
       logo: Logo
     }
   }
