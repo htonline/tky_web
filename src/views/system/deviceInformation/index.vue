@@ -338,6 +338,7 @@ export default {
     look(data) {
       selectPhotos(data).then(response => {
         this.DataList = response
+        console.log("this.DataList", this.DataList)
       })
       this.TunnelDialog3 = true
     },
