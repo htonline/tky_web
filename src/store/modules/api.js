@@ -20,6 +20,8 @@ const api = {
     swaggerApi: baseUrl + '/swagger-ui.html',
     // 文件上传
     fileUploadApi: baseUrl + '/api/localStorage',
+    // radarPicture图片上传
+    pictureUploadApi: baseUrl + '/api/radarPicture/uploadPicture',
     // baseUrl，
     baseApi: baseUrl
   }

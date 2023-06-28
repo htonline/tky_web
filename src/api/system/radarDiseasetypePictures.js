@@ -30,4 +30,5 @@ export function selectPhotos(data) {
     data
   })
 }
+
 export default { add, edit, del, selectPhotos }

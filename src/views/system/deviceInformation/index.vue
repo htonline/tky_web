@@ -23,6 +23,7 @@
       <!--如果想在工具栏加入更多按钮，可以使用插槽方式， slot = 'left' or 'right'-->
       <crudOperation :permission="permission" />
       <!--表单组件-->
+<!--      编辑dialog-->
       <el-dialog :close-on-click-modal="false" :before-close="crud.cancelCU" :visible.sync="crud.status.cu > 0" :title="crud.status.title" width="500px">
         <el-form ref="form" :model="form" :rules="rules" size="small" label-width="80px">
           <!--
@@ -167,6 +168,7 @@
       </el-table>
       <!--分页组件-->
       <pagination />
+<!--      上传文件Dialog-->
       <el-dialog title="附件材料" :visible.sync="TunnelDialog">
         <el-upload
           multiple
@@ -362,10 +364,10 @@ export default {
       console.log(file, fileList)
     },
     handlePreview(file) {
-      console.log(file)
+      console.log("file:",file)
     },
     handleAvatarSuccess(file) {
-      console.log(file)
+      console.log("file:",file)
     },
     // 上传文件
     upload() {
