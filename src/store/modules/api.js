@@ -22,7 +22,7 @@ const api = {
     fileUploadApi: baseUrl + '/api/localStorage',
     // radarPicture图片上传
     pictureUploadApi: baseUrl + '/api/radarPicture/uploadPicture',
-    // baseUrl，
+    // baseUrl: http://localhost:8014/
     baseApi: baseUrl
   }
 }
