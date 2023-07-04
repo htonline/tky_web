@@ -154,7 +154,7 @@
           :on-remove="handleRemove"
           :auto-upload="false"
           :file-list="fileList"
-          :limit="10"
+          :limit="500"
           :show-file-list="true"
           :before-upload="beforeUpload"
           :headers="headers"
@@ -163,7 +163,7 @@
         >
           <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
           <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传文件</el-button>
-          <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+          <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb(一次最多上传500张)</div>
         </el-upload>
       </el-dialog>
       <!--      设备照片Dialog组件-->
@@ -283,6 +283,19 @@ export default {
     [CRUD.HOOK.beforeRefresh]() {
       return true
     },
+    // 从字符串路径中,提取它的数字文件名，转化为数字
+    extractNumber(str) {
+      const numberPart = str.match(/\d+/)[0]
+      return parseInt(numberPart, 10)
+    },
+    // 自定义排序函数
+    customSort(a, b) {
+      // 提取需要比较的部分，如 "1.png" 的数字部分
+      const numberA = this.extractNumber(a)
+      const numberB = this.extractNumber(b)
+      // 比较数字部分
+      return numberA - numberB
+    },
     look(data) {
       // data: 当前点击行的数据：id:1; diseaseType:"路基脱空"
       console.log("data", data)
@@ -303,6 +316,9 @@ export default {
 
         console.log("picturePath", this.picturePath)
         console.log("picturesList21321", this.picturesList)
+
+        this.picturesList.sort((a, b) => this.customSort(a.fileName, b.fileName))
+
       })
       this.radarPictureDialog = true
     },
